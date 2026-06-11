@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
@@ -17,42 +17,45 @@ concurrency:
 
 jobs:
   build:
+    name: Build static app
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-      - name: Setup Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
 
       - name: Build
-        run: bun run build
-        env:
-          LOVABLE_SANDBOX: "1"
+        run: npm run build
 
-      - name: Configure custom domain
-        run: |
-          echo "watchschedule.com" > dist/client/CNAME
-          touch dist/client/.nojekyll
-
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: dist
 
   deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
+
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy Pages artifact
         id: deployment
         uses: actions/deploy-pages@v4
