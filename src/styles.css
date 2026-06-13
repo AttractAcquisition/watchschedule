@@ -1,0 +1,127 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink: #081423;
+  --color-ink-2: #0b1a2c;
+  --color-ink-3: #10233a;
+  --color-ink-4: #152d48;
+  --color-line: #203247;
+  --color-line-2: #132236;
+  --color-mute: #aeb7c3;
+  --color-mute-2: #6b7280;
+  --color-bone: #faf9f5;
+  --color-bone-2: #efeee7;
+  --color-bronze: #b88a44;
+  --color-slate: #6b7280;
+  --color-success: #22c55e;
+  --color-alert: #f59e0b;
+  --color-critical: #dc2626;
+
+  --font-sans: "Avenir Next", "Inter", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Avenir Next", "Inter", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: #081423;
+  --foreground: #faf9f5;
+  --card: #faf9f5;
+  --card-foreground: #081423;
+  --popover: #faf9f5;
+  --popover-foreground: #081423;
+  --primary: #b88a44;
+  --primary-foreground: #081423;
+  --secondary: #faf9f5;
+  --secondary-foreground: #081423;
+  --muted: #faf9f5;
+  --muted-foreground: #6b7280;
+  --accent: #b88a44;
+  --accent-foreground: #081423;
+  --destructive: #dc2626;
+  --destructive-foreground: #faf9f5;
+  --border: #d9d4c8;
+  --input: #d9d4c8;
+  --ring: #b88a44;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html {
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: -0.011em;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.028em;
+    font-weight: 600;
+  }
+}
+
+@utility eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility chart-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility chart-grid-fine {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility bone-grid {
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility glass-dark {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid #203247;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 20px 40px -20px rgba(0,0,0,0.6);
+}
